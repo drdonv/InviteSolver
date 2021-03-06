@@ -1,18 +1,22 @@
 import pyperclip
 import re
+import win32clipboard
+import keyboard
 import pyautogui
+import time
 
-line = input("Enter string: ")
+keyboard.wait("ALT")
+win32clipboard.OpenClipboard()
+line = win32clipboard.GetClipboardData()
+win32clipboard.CloseClipboard()
+
+#line = input("Enter string: ")
 line = line.replace("https://discord.gg/", "")
 line = line.replace("discord.gg/", "")
 line = re.sub('[\W_]+', '', line)
 
-
-#pyperclip.copy("<@456989590708813824>")
-#for  x in range(100):
-#    pyperclip.paste()
-#    pyautogui.press('enter')
-
-
 print("https://discord.gg/" + line)
 pyperclip.copy("discord.gg/" + line)
+pyautogui.hotkey('ctrl', 'v', interval = 0.15)
+#time.sleep(0.05)
+pyautogui.press('enter')
